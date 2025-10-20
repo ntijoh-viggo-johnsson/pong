@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "pfb1+kMdb/A=",
+  "success": true,
+  "projectFilePath": "/Users/viggo.johnsson/Desktop/fun_games/pong/PongGame/PongGame.csproj",
+  "expectedPackageFiles": [
+    "/Users/viggo.johnsson/.nuget/packages/raylib-cs/7.0.1/raylib-cs.7.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
