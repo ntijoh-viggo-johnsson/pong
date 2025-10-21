@@ -11,10 +11,17 @@ class Ball
 
     public float speed = 2f;
 
+    private Sound hitPaddle;
+    private Sound hitWall;
+
+
     int screenWidth, screenHeight;
 
-    public Ball(int screenWidth, int screenHeight)
+    public Ball(int screenWidth, int screenHeight, Sound hitPaddle, Sound hitWall)
     {
+        this.hitPaddle = hitPaddle;
+        this.hitWall = hitWall;
+
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         Reset();
@@ -57,6 +64,8 @@ class Ball
         if (y <= 0 || y + size >= screenHeight)
         {
             dy *= -1;
+
+            Raylib.PlaySound(hitWall);
         }
     }
 
@@ -75,14 +84,14 @@ class Ball
             dx = -dx;
             speed += 0.5f;
 
-
+            Raylib.PlaySound(hitPaddle);
 
             float nudge = ((float)rnd.NextDouble() - 0.5f) * 0.5f;
             dy += nudge;
 
-            // float magnitude = MathF.Sqrt(dx * dx + dy * dy);
-            // dx = dx / magnitude * speed;
-            // dy = dy / magnitude * speed;
+            float magnitude = MathF.Sqrt(dx * dx + dy * dy);
+            dx = dx / magnitude * speed;
+            dy = dy / magnitude * speed;
         }
     }
 }

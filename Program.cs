@@ -15,9 +15,13 @@ class Program
         int screenHeight = 480;
 
         Raylib.InitWindow(screenWidth, screenHeight, "Pong");
+        Raylib.InitAudioDevice();
+
+        Sound hitPaddle = Raylib.LoadSound("assets/sounds_ping_pong_8bit/ping_pong_8bit_plop.ogg");
+        Sound hitWall = Raylib.LoadSound("assets/sounds_ping_pong_8bit/ping_pong_8bit_beeep.ogg");
         Raylib.SetTargetFPS(120);
 
-        Ball ball = new Ball(screenWidth, screenHeight);
+        Ball ball = new Ball(screenWidth, screenHeight, hitPaddle, hitWall);
         ball.Start();
 
         Paddle leftPaddle = new Paddle(50f, screenHeight);
@@ -107,5 +111,8 @@ class Program
         }
 
         Raylib.CloseWindow();
+        Raylib.UnloadSound(hitPaddle);
+        Raylib.UnloadSound(hitWall);
+        Raylib.CloseAudioDevice();
     }
 }
