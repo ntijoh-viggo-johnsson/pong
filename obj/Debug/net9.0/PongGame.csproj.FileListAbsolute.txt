@@ -20,3 +20,4 @@
 /Users/viggo.johnsson/Desktop/fun_games/pong/PongGame/obj/Debug/net9.0/PongGame.pdb
 /Users/viggo.johnsson/Desktop/fun_games/pong/PongGame/obj/Debug/net9.0/PongGame.genruntimeconfig.cache
 /Users/viggo.johnsson/Desktop/fun_games/pong/PongGame/obj/Debug/net9.0/ref/PongGame.dll
+/Users/viggo.johnsson/Desktop/fun_games/pong/PongGame/obj/Debug/net9.0/PongGame.sourcelink.json
