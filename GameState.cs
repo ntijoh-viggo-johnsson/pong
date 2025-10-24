@@ -4,5 +4,6 @@ enum GameState
 {
     Menu,
     Playing,
-    Paused
+    Paused,
+    SelectMode
 }

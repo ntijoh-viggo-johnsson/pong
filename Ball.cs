@@ -1,3 +1,4 @@
+using System.Formats.Asn1;
 using System.IO.Compression;
 using System.Runtime.CompilerServices;
 using Microsoft.VisualBasic;
@@ -8,7 +9,6 @@ class Ball
     public float x, y;
     public float dx = 2f, dy = 2f;
     public float size = 15;
-
     public float speed = 2f;
 
     private Sound hitPaddle;
@@ -61,8 +61,16 @@ class Ball
         x += dx;
         y += dy;
 
-        if (y <= 0 || y + size >= screenHeight)
+        if (y <= 0)
         {
+            y = 0;
+            dy *= -1;
+            
+            Raylib.PlaySound(hitWall);
+        }
+        if (y + size >= screenHeight)
+        {
+            y = screenHeight - size;
             dy *= -1;
 
             Raylib.PlaySound(hitWall);
@@ -81,10 +89,22 @@ class Ball
         if (colliding)
         {
 
-            dx = -dx;
-            speed += 0.5f;
+            float overlapTop = (paddle.y + paddle.paddleHeight) - y;
+            float overlapBottom = (paddle.y + size) - y;
 
-            Raylib.PlaySound(hitPaddle);
+            
+            dx = -dx;
+
+                float paddleCenter = paddle.y + paddle.paddleHeight / 2;
+                float ballCenter = y + size / 2;
+                float distanceFromCenter = ballCenter - paddleCenter;
+                float normalized = distanceFromCenter / (paddle.paddleHeight / 2);
+                dy = normalized * speed;
+                
+
+
+
+            speed += 0.2f;
 
             float nudge = ((float)rnd.NextDouble() - 0.5f) * 0.5f;
             dy += nudge;
@@ -92,6 +112,8 @@ class Ball
             float magnitude = MathF.Sqrt(dx * dx + dy * dy);
             dx = dx / magnitude * speed;
             dy = dy / magnitude * speed;
+
+            Raylib.PlaySound(hitPaddle);
         }
     }
 }
